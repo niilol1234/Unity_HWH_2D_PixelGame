@@ -73,8 +73,8 @@ public class Player : MonoBehaviour
         // 2D 物理 圓形碰撞(中心點，半徑，方向，距離，圖層)
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, rangeAttack, -transform.up, 0, 1 << 8);
 
-        // 如果 碰到的物件 標籤 為 道具 就刪除(碰到的碰撞氣的遊戲物件)
-        if (hit.collider.tag == "道具") Destroy(hit.collider.gameObject);
+        // 如果 碰到的物件 並且 碰到的物件 標籤 為 道具 就刪除(碰到的碰撞氣的遊戲物件)
+        if (hit && hit.collider.tag == "道具") hit.collider.GetComponent<Item>().DropProp();
     }
 
     private void Hit()
