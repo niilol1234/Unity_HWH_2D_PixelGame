@@ -3,7 +3,13 @@ guid: 2dbbe5f9f8f1229409fee1fb4d7f7cea
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - joystick: {instanceID: 0}
+  - tra: {instanceID: 0}
+  - ani: {instanceID: 0}
+  - aud: {instanceID: 0}
+  - soundAttack: {instanceID: 0}
+  - soundEat: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
