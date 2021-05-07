@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
     public HpManager hpManager;
     [Header("攻擊力"), Range(0, 1000)]
     public float attack = 20;
+    [Header("等級文字")]
+    public Text textLv;
 
     private float hpMax;
 
@@ -89,6 +91,8 @@ public class Player : MonoBehaviour
 
         // 如果 碰到的物件 並且 碰到的物件 標籤 為 道具 就刪除(碰到的碰撞氣的遊戲物件)
         if (hit && hit.collider.tag == "道具") hit.collider.GetComponent<Item>().DropProp();
+        // 如果 打到標籤是 敵人 就對她造成傷害
+        if (hit && hit.collider.tag == "敵人") hit.collider.GetComponent<Enemy>().Hit(attack);
     }
 
     /// <summary>
