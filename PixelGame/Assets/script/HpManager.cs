@@ -8,6 +8,12 @@ public class HpManager : MonoBehaviour
     public Image bar;
     [Header("傷害數值")]
     public RectTransform rectDamage;
+    [Header("血量")]
+    public float hp = 200;
+    [Header("血條系統")]
+    public HpManager hpManager;
+
+    private float hpMax;
 
     /// <summary>
     /// 輸入血量與血量最大值更新血條
@@ -19,10 +25,16 @@ public class HpManager : MonoBehaviour
         // 血條.填滿數值 = 當前血量 / 血量最大值
         bar.fillAmount = hp / hpMax;
     }
-    public IEnumerator ShowDamage()
+
+    /// <summary>
+    /// 顯示傷害值
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator ShowDamage(float damage)
     {
         RectTransform rect = Instantiate(rectDamage, transform);  // 生成傷害數值在血條系統內
         rect.anchoredPosition = new Vector2(0, 200);              // 指定座標
+        rect.GetComponent<Text>().text = damage.ToString();       // 更新數值
 
         float y = rect.anchoredPosition.y;                        // 取得原始 Y 軸
 
@@ -32,5 +44,6 @@ public class HpManager : MonoBehaviour
             rect.anchoredPosition = new Vector2(0, y);            // 更新座標
             yield return new WaitForSeconds(0.02f);               // 等待幾秒(秒數)
         }
+        Destroy(rect.gameObject, 0.5f);                           // 刪除傷害數值物件
     }
 }

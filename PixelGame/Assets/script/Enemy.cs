@@ -15,14 +15,23 @@ public class Enemy : MonoBehaviour
     [Header("攻擊力"), Range(0, 1000)]
     public float attack = 20;
 
+
     private Transform player;
     /// <summary>
     /// 計時器
     /// </summary>
     private float timer;
 
+    [Header("血量")]
+    public float hp = 200;
+    [Header("血條系統")]
+    public HpManager hpManager;
+
+    private float hpMax;
+
     private void Start()
     {
+        hpMax = hp;
         // 玩家變形 = 尋找遊戲物件("物件名稱").變形
         player = GameObject.Find("玩家").transform;
     }
