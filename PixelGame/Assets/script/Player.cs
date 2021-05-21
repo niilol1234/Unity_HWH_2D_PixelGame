@@ -47,7 +47,9 @@ public class Player : MonoBehaviour
     public Text textLv;
 
     private float hpMax;
-    private int coin;
+    public int coin;
+    public float attackWeapon;
+
     #endregion
 
     #region 方法
@@ -85,8 +87,10 @@ public class Player : MonoBehaviour
 
         // 如果 碰到的物件 並且 碰到的物件 標籤 為 道具 就刪除(碰到的碰撞氣的遊戲物件)
         if (hit && hit.collider.tag == "道具") hit.collider.GetComponent<Item>().DropProp();
-        // 如果 打到標籤是 敵人 就對她造成傷害
-        if (hit && hit.collider.tag == "敵人") hit.collider.GetComponent<Enemy>().Hit(attack);
+        // 如果 打到標籤是 敵人 就對敵人造成傷害
+        if (hit && hit.collider.tag == "敵人") hit.collider.GetComponent<Enemy>().Hit(attack + attackWeapon);
+        // 如果 打到標籤是 NPC 就開啟商店
+        if (hit && hit.collider.tag == "NPC") hit.collider.GetComponent<NPC>().OpenShop();
     }
     #endregion
 
@@ -197,6 +201,10 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        // 給予玩家起始金幣
+        coin = 10;
+        textCoin.text = "青幣：" + coin;
+
         hpMax = hp;    // 取得血量最大值
 
         // 利用公式寫入經驗值資料 - 一等 100 ， 兩等 200....
